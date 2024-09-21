@@ -18,13 +18,14 @@ app.post("/todo", async(req, res) => {
   }
   //put the data in mongodb
 
-  await todo.create({
+  const todos=await todo.create({
     title:createPayload.title,
     description:createPayload.description,
     completed:false
   })
   res.json({
-    msg:"Todo created"
+    msg:"Todo created",
+    todos:todos
   })
 });
 app.get("/todos", async(req, res) => {

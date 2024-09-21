@@ -15,10 +15,13 @@ function CreateTodo({ setTodos }) {
     try {
       const response = await fetch("http://localhost:3000/todo", {
         method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify({
           title,
           description,
-          complete:false
+          complete: false,
         }),
       });
 
@@ -27,7 +30,7 @@ function CreateTodo({ setTodos }) {
       }
 
       const data = await response.json();
-
+      console.log(data)
       // If the response contains updated todos list
       console.log("After data")
       if (data.todos && Array.isArray(data.todos)) {
@@ -36,7 +39,7 @@ function CreateTodo({ setTodos }) {
       } else {
         // If only the new todo item is returned
         console.log("inside elde")
-        setTodos((prevTodos) => [...prevTodos, data]);
+        setTodos((prevTodos) => [...prevTodos, data.todos]);
       }
 
       // Clear input fields after adding
