@@ -12,6 +12,8 @@ async function getUser(email: string) {
     const values = [email];
     const result = await client.query(query, values);
 
+    
+
     if (result.rows.length > 0) {
       console.log("User found:", result.rows[0]); // Output user data
       return result.rows[0]; // Return the user data
